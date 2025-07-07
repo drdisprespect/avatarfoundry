@@ -1,6 +1,9 @@
-# 🎯 Azure AI Real-Time Chat Application
+<img width="782" alt="Screenshot 2025-07-07 at 4 52 13 PM" src="https://github.com/user-attachments/assets/19aada0d-1329-48e5-922c-9a6844e5cb24" /># 🎯 Azure AI Real-Time Chat Application
 
 A sophisticated, real-time AI chat application built with Next.js and Azure OpenAI services, featuring voice interaction, intelligent search capabilities, and a modern, responsive UI.
+
+<img width="779" alt="Screenshot 2025-07-07 at 4 52 22 PM" src="https://github.com/user-attachments/assets/44d88661-6ce4-4f39-9b02-de8dd19d28bb" />
+
 
 ![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15.3.0-black)
