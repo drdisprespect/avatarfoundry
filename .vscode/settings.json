@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/e7fa3997-3985-4931-9ecf-90830d11989d/resourceGroups/appsvc_linux_eastus_basic/providers/Microsoft.Web/sites/FoundryAvatar",
+    "appService.deploySubpath": "."
+}

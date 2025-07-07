@@ -1,0 +1,873 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  :root {
+    /* Light mode - Pure modern minimalism */
+    --background: 255 255 255;
+    --foreground: 17 17 17;
+    --card: 250 250 252;
+    --card-foreground: 17 17 17;
+    --popover: 255 255 255;
+    --popover-foreground: 17 17 17;
+    --primary: 0 122 255;
+    --primary-foreground: 255 255 255;
+    --secondary: 242 242 247;
+    --secondary-foreground: 17 17 17;
+    --muted: 242 242 247;
+    --muted-foreground: 99 99 102;
+    --accent: 239 239 244;
+    --accent-foreground: 17 17 17;
+    --destructive: 255 59 48;
+    --destructive-foreground: 255 255 255;
+    --success: 52 199 89;
+    --success-foreground: 255 255 255;
+    --warning: 255 149 0;
+    --warning-foreground: 17 17 17;
+    --border: 224 224 230;
+    --input: 255 255 255;
+    --ring: 0 122 255;
+    --radius: 16px;
+  }
+  
+  .dark {
+    /* Ultra-dark mode - True black Apple/Claude minimalism */
+    --background: 0 0 0;
+    --foreground: 255 255 255;
+    --card: 8 8 10;
+    --card-foreground: 248 248 248;
+    --popover: 8 8 10;
+    --popover-foreground: 248 248 248;
+    --primary: 88 96 246;
+    --primary-foreground: 255 255 255;
+    --secondary: 16 16 20;
+    --secondary-foreground: 248 248 248;
+    --muted: 16 16 20;
+    --muted-foreground: 156 156 156;
+    --accent: 24 24 28;
+    --accent-foreground: 248 248 248;
+    --destructive: 248 58 58;
+    --destructive-foreground: 255 255 255;
+    --success: 46 204 96;
+    --success-foreground: 255 255 255;
+    --warning: 255 159 28;
+    --warning-foreground: 8 8 10;
+    --border: 32 32 36;
+    --input: 8 8 10;
+    --ring: 88 96 246;
+    --radius: 16px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer components {
+  /* Modern interactive background - Claude/Apple inspired */
+  .interactive-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .interactive-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(56, 189, 248, 0.05) 0%, transparent 45%),
+      radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.05) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+    animation: modernFloat 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .dark .interactive-bg::before {
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(56, 189, 248, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+  }
+  
+  @keyframes modernFloat {
+    0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+    25% { transform: translateX(-10px) translateY(-5px) scale(1.02); }
+    50% { transform: translateX(10px) translateY(5px) scale(0.98); }
+    75% { transform: translateX(-5px) translateY(10px) scale(1.01); }
+  }
+
+  /* Ultra-modern glass morphism - Claude/Apple inspired */
+  .glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.06),
+      0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  
+  .dark .glass {
+    background: rgba(39, 39, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 1px 0 rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Modern card design */
+  .modern-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: calc(var(--radius) + 4px);
+    box-shadow: 
+      0 4px 24px rgba(0, 0, 0, 0.04),
+      0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .dark .modern-card {
+    background: linear-gradient(
+      135deg,
+      rgba(8, 8, 10, 0.98) 0%,
+      rgba(16, 16, 20, 0.95) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 20px 80px rgba(0, 0, 0, 0.95),
+      0 8px 32px rgba(0, 0, 0, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+  }
+  
+  .modern-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 40px rgba(0, 0, 0, 0.08),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  
+  .dark .modern-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 
+      0 24px 96px rgba(0, 0, 0, 0.98),
+      0 12px 48px rgba(0, 0, 0, 0.9),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Modern button system */
+  .modern-button {
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--radius) - 2px);
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    outline: none;
+  }
+  
+  .modern-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+  
+  .modern-button:hover::before {
+    left: 100%;
+  }
+  
+  /* Primary button */
+  .btn-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 100%);
+    color: hsl(var(--primary-foreground));
+    box-shadow: 
+      0 4px 14px hsl(var(--primary) / 0.3),
+      0 1px 3px hsl(var(--primary) / 0.2);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      0 6px 20px hsl(var(--primary) / 0.4),
+      0 2px 6px hsl(var(--primary) / 0.3);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 
+      0 2px 8px hsl(var(--primary) / 0.4),
+      0 1px 3px hsl(var(--primary) / 0.3);
+  }
+  
+  /* Secondary button */
+  .btn-secondary {
+    background: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  
+  .btn-secondary:hover {
+    background: hsl(var(--accent));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Ghost button */
+  .btn-ghost {
+    background: transparent;
+    color: hsl(var(--foreground));
+    border: none;
+  }
+  
+  .btn-ghost:hover {
+    background: hsl(var(--accent) / 0.5);
+  }
+
+  /* Modern input system */
+  .modern-input {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: calc(var(--radius) - 2px);
+    color: hsl(var(--foreground));
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  }
+  
+  .modern-input::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .modern-input:focus {
+    border-color: hsl(var(--ring));
+    box-shadow: 
+      0 0 0 3px hsl(var(--ring) / 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  
+  .dark .modern-input:focus {
+    box-shadow: 
+      0 0 0 3px hsl(var(--ring) / 0.2),
+      0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Modern animations */
+  .fade-in {
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .slide-up {
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Modern scale in */
+  .scale-in {
+    animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Floating elements */
+  .float-gentle {
+    animation: floatGentle 6s ease-in-out infinite;
+  }
+  
+  @keyframes floatGentle {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* Modern scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 6px;
+    border: none;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.6);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Apple-style scale animations for dropdowns */
+@keyframes apple-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes apple-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+}
+
+.animate-apple-scale-in {
+  animation: apple-scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-apple-scale-out {
+  animation: apple-scale-out 0.15s cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Improved scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+  background-clip: padding-box;
+}
+
+/* Apple-style scale animations for dropdowns */
+@keyframes apple-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes apple-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+}
+
+.animate-apple-scale-in {
+  animation: apple-scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-apple-scale-out {
+  animation: apple-scale-out 0.15s cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Comprehensive input theming - Fix visibility and brown color issues */
+input, textarea, select {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: hsl(var(--ring)) !important;
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Fix textarea specifically */
+textarea {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: calc(var(--radius) * 0.75) !important;
+  font-family: inherit !important;
+  resize: vertical;
+  transition: all 0.2s ease !important;
+}
+
+textarea:focus {
+  border-color: hsl(var(--ring)) !important;
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2) !important;
+  background-color: hsl(var(--card)) !important;
+}
+
+/* Force proper colors for all form elements */
+.apple-form-element {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: calc(var(--radius) * 0.75) !important;
+  transition: all 0.2s ease-apple !important;
+}
+
+.apple-form-element:focus {
+  border-color: hsl(var(--ring)) !important;
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2) !important;
+  background-color: hsl(var(--card)) !important;
+}
+
+.apple-form-element::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Dark mode specific overrides */
+.dark input, .dark textarea, .dark select {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.dark input:focus, .dark textarea:focus, .dark select:focus {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--ring)) !important;
+}
+
+/* Light mode specific overrides for maximum contrast */
+html:not(.dark) input, html:not(.dark) textarea, html:not(.dark) select {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(17 17 17) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+html:not(.dark) input::placeholder, html:not(.dark) textarea::placeholder {
+  color: hsl(72 72 74) !important;
+}
+
+/* Apple-style ease animation */
+.ease-apple {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Ensure markdown content has proper contrast */
+.markdown-content {
+  color: hsl(var(--card-foreground));
+}
+
+.markdown-content ol, .markdown-content ul {
+  color: hsl(var(--card-foreground));
+}
+
+.markdown-content li, .markdown-content p {
+  color: hsl(var(--card-foreground));
+}
+
+.dark .markdown-content ol, .dark .markdown-content ul {
+  color: hsl(var(--card-foreground));
+}
+
+.dark .markdown-content li, .dark .markdown-content p {
+  color: hsl(var(--card-foreground));
+}
+
+/* Ultra-modern chat message styles */
+.ultra-message-card {
+  @apply rounded-3xl backdrop-blur-2xl transition-all duration-500;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(248, 248, 252, 0.9) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.dark .ultra-message-card {
+  background: linear-gradient(
+    135deg,
+    rgba(24, 24, 27, 0.98) 0%,
+    rgba(39, 39, 42, 0.95) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.7),
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.ultra-message-card:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.dark .ultra-message-card:hover {
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.8),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Ultra-modern input styling */
+.ultra-input {
+  @apply rounded-2xl backdrop-blur-2xl transition-all duration-300;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.dark .ultra-input {
+  background: rgba(24, 24, 27, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.ultra-input:focus {
+  border-color: hsl(var(--ring));
+  box-shadow: 
+    0 0 0 3px hsl(var(--ring) / 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dark .ultra-input:focus {
+  box-shadow: 
+    0 0 0 3px hsl(var(--ring) / 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.7);
+}
+
+/* Ultra-modern button styles */
+.ultra-button {
+  @apply rounded-2xl backdrop-blur-2xl transition-all duration-300 ease-out;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0) scale(1);
+}
+
+.ultra-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.ultra-button:hover::before {
+  left: 100%;
+}
+
+.ultra-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.1);
+}
+
+.ultra-button:active {
+  transform: translateY(-1px) scale(0.98);
+  transition: all 0.1s ease-out;
+}
+
+/* Ultra-modern empty state */
+.ultra-empty-state {
+  @apply flex flex-col items-center justify-center text-center space-y-6 p-12;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth sidebar transition when connecting */
+.sidebar-transition {
+  transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: left center;
+}
+
+.sidebar-hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-visible {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Avatar centering animation - Apple-style smooth transition */
+.avatar-center {
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.avatar-centered {
+  margin: 0 auto;
+  transform: scale(1.1);
+  max-width: 85%;
+}
+
+/* Enhanced content area transition when connected */
+.content-centered {
+  width: 100%;
+  max-width: none;
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark mode glass effects - Ultra-modern */
+.dark .glass-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(8, 8, 10, 0.95) 0%,
+    rgba(16, 16, 20, 0.92) 50%,
+    rgba(8, 8, 10, 0.98) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 20px 80px rgba(0, 0, 0, 0.9),
+    0 8px 32px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Ultra-dark interactive background */
+.dark .interactive-bg::before {
+  background: 
+    radial-gradient(circle at 15% 45%, rgba(88, 96, 246, 0.06) 0%, transparent 65%),
+    radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.04) 0%, transparent 65%),
+    radial-gradient(circle at 45% 85%, rgba(59, 130, 246, 0.03) 0%, transparent 65%);
+}
+
+/* Dark mode button improvements - Ultra-modern high contrast */
+.dark .ultra-button {
+  background: linear-gradient(
+    135deg,
+    rgba(24, 24, 28, 0.95) 0%,
+    rgba(16, 16, 20, 0.98) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: hsl(var(--foreground));
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.dark .ultra-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(32, 32, 36, 0.98) 0%,
+    rgba(24, 24, 28, 1) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 4px 16px rgba(88, 96, 246, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Dark mode input improvements - Ultra-modern high contrast */
+.dark .ultra-input {
+  background: rgba(8, 8, 10, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: hsl(var(--foreground));
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.8),
+    0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.dark .ultra-input:focus {
+  background: rgba(8, 8, 10, 1);
+  border-color: hsl(var(--ring));
+  box-shadow: 
+    0 0 0 3px hsl(var(--ring) / 0.25),
+    0 8px 24px rgba(0, 0, 0, 0.9),
+    inset 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Dark mode message cards - Ultra-modern high contrast */
+.dark .ultra-message-card {
+  background: linear-gradient(
+    135deg,
+    rgba(8, 8, 10, 0.98) 0%,
+    rgba(16, 16, 20, 0.95) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.95),
+    0 4px 16px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.dark .ultra-message-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 16px 64px rgba(0, 0, 0, 0.98),
+    0 8px 24px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Dark mode select improvements */
+.dark .modern-input {
+  background: rgba(8, 8, 10, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: hsl(var(--foreground));
+}
+
+.dark .modern-input:focus {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.25);
+}
